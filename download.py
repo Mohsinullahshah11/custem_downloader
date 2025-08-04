@@ -37,21 +37,21 @@ class Download:
             stream = yt.streams.get_audio_only()
             if stream:
                 audio_path = stream.download(output_path=download_folder)
-                mp3_path = os.path.splitext(audio_path)[0] + ".mp3"
+                # mp3_path = os.path.splitext(audio_path)[0] + ".mp3"
 
-                audio = AudioFileClip(audio_path)
-                audio.write_audiofile(mp3_path, codec='libmp3lame', bitrate='320k')
+                # audio = AudioFileClip(audio_path)
+                # audio.write_audiofile(mp3_path, codec='libmp3lame', bitrate='320k')
 
 
-                os.remove(audio_path)
-                return [mp3_path]
+                # os.remove(audio_path)
+                return [audio_path]
             else:
                 return 'notFound'
     def playlist_download(self):
 
         yt = Playlist(self.youtube_url)
 
-        download_folder = "download/audios_folder"
+        download_folder = "download/downloaded_files"
 
         if not os.path.exists(download_folder):
             os.makedirs(download_folder)
@@ -72,13 +72,13 @@ class Download:
                 audio_file = audio_stream.download(output_path=download_folder)
 
                 # Convert to MP3 using FFmpeg directly
-                mp3_filename = os.path.splitext(audio_file)[0] + ".mp3"
-                audio = AudioFileClip(audio_file)
-                audio.write_audiofile(mp3_filename, codec='libmp3lame', bitrate='320k')
+                # mp3_filename = os.path.splitext(audio_file)[0] + ".mp3"
+                # audio = AudioFileClip(audio_file)
+                # audio.write_audiofile(mp3_filename, codec='libmp3lame', bitrate='320k')
 
-                # Remove original file after conversion
-                os.remove(audio_file)
+                # # Remove original file after conversion
+                # os.remove(audio_file)
 
-                print(f"Saved as MP3: {mp3_filename}")
+                print(f"Saved as MP3: {audio_file}")
         
         # return download_folder
