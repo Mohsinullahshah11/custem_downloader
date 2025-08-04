@@ -13,25 +13,32 @@ async function splitPDF() {
 
 
   // try {
-    const response = await fetch('/api/download', {
-      method: 'POST',
-      body: formData 
-    });
+  const response = await fetch('/api/download', {
+    method: 'POST',
+    body: formData
+  });
 
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
+  const contentDisposition = response.headers.get('Content-Disposition');
+  let filename = 'downloaded_file.zip';  // default
+  if (contentDisposition && contentDisposition.includes('filename=')) {
+    const match = contentDisposition.match(/filename="?(.+?)"?$/);
+    if (match) filename = match[1];
+  }
 
-    const a = document.createElement('a');
-    a.href = url;
-    console.log(`url ${url}`)
-    a.download
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+  // Create a stream and download it natively
+  const blob = await response.blob();
+  const url = window.URL.createObjectURL(blob);
 
-    window.URL.revokeObjectURL(url);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 
-  
+  window.URL.revokeObjectURL(url);
+
+
 
 
 }
