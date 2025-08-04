@@ -1,0 +1,18 @@
+ body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to right bottom, #e0f2fe, #d1e5f8); /* Light blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px; /* More padding for overall comfort */
+            box-sizing: border-box;
+        }
+
+        /* Custom styles for focus/hover states to make them more distinct */
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.45); /* Custom blue glow */
+            border-color: #3b82f6; /* Blue border on focus */
+        }
