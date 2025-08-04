@@ -61,7 +61,7 @@ def post_data():
                 as_attachment=True
             )
         elif download_type == 'playlist':
-            download_folder = "download/audios_folder"
+            download_folder = "download/downloaded_files"
             file_path = downlaod.playlist_download()
 
             zip_buffer = io.BytesIO()
