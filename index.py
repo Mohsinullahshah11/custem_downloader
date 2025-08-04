@@ -52,6 +52,8 @@ def post_data():
             utlities = Utilities(file_path)
             utlities.delete_files()
 
+
+
             return send_file(
                 zip_buffer,
                 mimetype='application/zip',
