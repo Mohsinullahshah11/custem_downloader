@@ -73,7 +73,8 @@ class Download:
 
                 # Convert to MP3 using FFmpeg directly
                 mp3_filename = os.path.splitext(audio_file)[0] + ".mp3"
-                subprocess.run(['ffmpeg', '-i', audio_file, mp3_filename])
+                audio = AudioFileClip(audio_file)
+                audio.write_audiofile(mp3_filename, codec='libmp3lame', bitrate='320k')
 
                 # Remove original file after conversion
                 os.remove(audio_file)
