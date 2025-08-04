@@ -23,12 +23,13 @@ def greet():
     return jsonify({"message": f"Hello, {name}!"})
 
 # Split pdf api
-@app.route('/api/download', methods=['POST'])
+@app.route('/api/download', methods=['GET'])
 def post_data():
     try:
-        youtube_url = request.form.get('youtube_url')
-        download_type = request.form.get('download_type')
-        download_format = request.form.get('download_formet')
+        youtube_url = request.args.get('youtube_url')
+        download_type = request.args.get('download_type')
+        download_format = request.args.get('download_formet')
+
 
         print(f'Url {youtube_url}')
         print(f'download_type {download_type}')
