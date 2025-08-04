@@ -1,6 +1,8 @@
 import os
 from pytubefix import YouTube, Playlist
 from pytubefix.cli import on_progress
+from moviepy import AudioFileClip
+
 import subprocess
 
 
@@ -37,7 +39,9 @@ class Download:
                 audio_path = stream.download(output_path=download_folder)
                 mp3_path = os.path.splitext(audio_path)[0] + ".mp3"
 
-                subprocess.run(['ffmpeg', '-i', audio_path, mp3_path], check=True)
+                audio = AudioFileClip(audio_path)
+                audio.write_audiofile(mp3_path, codec='libmp3lame', bitrate='320k')
+
 
                 os.remove(audio_path)
                 return [mp3_path]

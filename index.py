@@ -40,12 +40,12 @@ def post_data():
         downlaod = Download(youtube_url=youtube_url, download_formet=download_format, download_type=download_type)
         if download_type == 'single':
             file_path = downlaod.single_download()
-            if file_path != 'notFound':
+            if file_path == 'notFound':
                 return
             
             zip_buffer = io.BytesIO()
             with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
-                zip_file.write(file_path[0], arcname=os.path.basename(file_path))
+                zip_file.write(file_path[0], arcname=os.path.basename(file_path[0]))
 
             zip_buffer.seek(0)
             utlities = Utilities(file_path)
@@ -97,3 +97,7 @@ def post_data():
 
 if __name__ == '__main__':  
     app.run(host='0.0.0.0', port=8000)
+
+
+
+# replit link : https://2fbc1f99-3ef2-4fd0-8d48-444da915cca8-00-fypennk9rwv.sisko.replit.dev/
